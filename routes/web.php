@@ -25,7 +25,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
 Route::group(['namespace' => 'Admin','prefix' => 'admin'], function() {
 
     Route::group(['namespace' => 'Admin\Main'], function () {
-        Route::get('/', [\App\Http\Controllers\Admin\Main\IndexController::class, '__invoke']);
+        Route::get('/', [\App\Http\Controllers\Admin\Main\IndexController::class, '__invoke'])->name('admin.main');
     });
     Route::group(['namespace' => 'Admin\Category', 'prefix' => 'categories'], function () {
         Route::get('/', [\App\Http\Controllers\Admin\Category\IndexController::class, '__invoke'])->name('admin.category.index');
