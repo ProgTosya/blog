@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Category;
+namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Category\UpdateRequest;
-use App\Models\Category;
+use App\Http\Requests\Admin\User\UpdateRequest;
+use App\Models\User;
 
 class UpdateController extends Controller
 {
-    public function __invoke(UpdateRequest $request, Category $category)
+    public function __invoke(UpdateRequest $request,User $user)
     {
 
         // TODO: Implement __invoke() method.
         $data = $request->validated();
-        $category->update($data);
+        $user->update($data);
 
-        return view('admin.categories.show', compact('category'));
+        return view('admin.users.show', compact('user'));
     }
 }

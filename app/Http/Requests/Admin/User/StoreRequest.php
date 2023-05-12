@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Category;
+namespace App\Http\Requests\Admin\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,7 +23,25 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string'
+            'name' => 'required|string',
+            'email' => 'email|required|string|unique:users',
+            'password' => 'string',
+            'role' => 'required|integer'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле необходимо для заполнения',
+            'name.string' => 'Поле должно быть строкой',
+            'email.email' => 'Неверно указан email',
+            'email.required' => 'Поле необходимо для заполнения',
+            'email.string' => 'Поле должно быть строкой',
+            'email.unique' => 'Пользователь с таким email уже существует',
+            'password.string' => 'Поле должно быть строкой',
+            'role.required' => 'Поле необходимо для заполнения',
+            'role.integer' => 'Поле должно быть целым числом',
         ];
     }
 }

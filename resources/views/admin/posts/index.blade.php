@@ -35,7 +35,7 @@
                     <a href="{{route('admin.post.create')}}" class="btn btn-block btn-primary btn-lg">Создать</a>
                 </div>
                 <div class="mt-3 row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="card">
 
                             <!-- /.card-header -->

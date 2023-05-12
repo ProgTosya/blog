@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Тэги</h1>
+                        <h1 class="m-0">Пользователи</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -32,10 +32,10 @@
                 <!-- /.row -->
                 <!-- Main row -->
                 <div class="col-2">
-                    <a href="{{route('admin.tag.create')}}" class="btn btn-block btn-primary btn-lg">Создать</a>
+                    <a href="{{route('admin.user.create')}}" class="btn btn-block btn-primary btn-lg">Создать</a>
                 </div>
                 <div class="mt-3 row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="card">
 
                             <!-- /.card-header -->
@@ -44,18 +44,20 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Название</th>
+                                        <th>Имя пользователя</th>
+                                        <th>Email пользователя</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($tags as $tag)
+                                    @foreach($users as $user)
                                         <tr>
-                                            <td>{{$tag->id}}</td>
-                                            <td>{{$tag->title}}</td>
-                                            <td><a href="{{route('admin.tag.show', $tag->id)}}"><i class="nav-icon fas fa-eye"></i></a></td>
-                                            <td><a href="{{route('admin.tag.edit', $tag->id)}}"><i class="text-success nav-icon fas fa-edit"></i></a></td>
+                                            <td>{{$user->id}}</td>
+                                            <td>{{$user->name}}</td>
+                                            <td>{{$user->email}}</td>
+                                            <td><a href="{{route('admin.user.show', $user->id)}}"><i class="nav-icon fas fa-eye"></i></a></td>
+                                            <td><a href="{{route('admin.user.edit', $user->id)}}"><i class="text-success nav-icon fas fa-edit"></i></a></td>
                                             <td>
-                                                <form action="{{route('admin.tag.delete', $tag->id)}}" method="POST">
+                                                <form action="{{route('admin.user.delete', $user->id)}}" method="POST">
                                                 @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="border-0 bg-transparent">

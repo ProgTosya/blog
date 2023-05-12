@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Category;
+namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\User;
 
 class IndexController extends Controller
 {
@@ -11,8 +12,8 @@ class IndexController extends Controller
     {
 
         // TODO: Implement __invoke() method.
-        $categories = Category::all();
+        $users = User::all();
 
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.users.index', compact('users'));
     }
 }

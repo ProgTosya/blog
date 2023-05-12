@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Category;
+namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\User;
 
 class ShowController extends Controller
 {
-    public function __invoke(Category $category)
+    public function __invoke(User $user)
     {
 
         // TODO: Implement __invoke() method.
 
 
-        return view('admin.categories.show', compact('category'));
+        return view('admin.users.show', compact('user'));
     }
 }
