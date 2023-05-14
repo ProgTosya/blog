@@ -22,7 +22,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
 });
 
 
-Route::group(['namespace' => 'Admin','prefix' => 'admin'], function() {
+Route::group(['namespace' => 'Admin','prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function() {
 
     Route::group(['namespace' => 'Admin\Main'], function () {
         Route::get('/', [\App\Http\Controllers\Admin\Main\IndexController::class, '__invoke'])->name('admin.main');
@@ -66,4 +66,4 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin'], function() {
 });
 
 
-Auth::routes();
+Auth::routes(['verify' => 'true']);
