@@ -18,9 +18,24 @@ Route::get('/', function () {
     return 'aa';
 });
 Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
-    Route::get('/', IndexController::class);
+    Route::get('/', IndexController::class)->name('main.index');
 });
 
+Route::group(['namespace' => 'Personal','prefix' => 'personal', 'middleware' => ['auth', 'verified']], function() {
+    Route::group(['namespace' => 'Main', 'prefix' => 'main'], function () {
+        Route::get('/', [\App\Http\Controllers\Personal\Main\IndexController::class, '__invoke'])->name('personal.main.index');
+    });
+    Route::group(['namespace' => 'Liked', 'prefix' => 'liked'], function () {
+        Route::get('/', [\App\Http\Controllers\Personal\Liked\IndexController::class, '__invoke'])->name('personal.liked.index');
+        Route::delete('/{post}', [\App\Http\Controllers\Personal\Liked\DeleteController::class, '__invoke'])->name('personal.liked.delete');
+    });
+    Route::group(['namespace' => 'Comment', 'prefix' => 'comments'], function () {
+        Route::get('/', [\App\Http\Controllers\Personal\Comment\IndexController::class, '__invoke'])->name('personal.comment.index');
+        Route::get('/{comment}/edit', [\App\Http\Controllers\Personal\Comment\EditController::class, '__invoke'])->name('personal.comment.edit');
+        Route::patch('/{comment}', [\App\Http\Controllers\Personal\Comment\UpdateController::class, '__invoke'])->name('personal.comment.update');
+        Route::delete('/{comment}', [\App\Http\Controllers\Personal\Comment\DeleteController::class, '__invoke'])->name('personal.comment.delete');
+    });
+});
 
 Route::group(['namespace' => 'Admin','prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function() {
 

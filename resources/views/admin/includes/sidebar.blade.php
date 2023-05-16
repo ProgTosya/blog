@@ -4,9 +4,20 @@
         <ul class="mt-2 nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
-            <a href="{{route('admin.main')}}" class="brand-link">
-                <span class="brand-text font-weight-light ">Главная</span>
-            </a>
+            <li class="nav-item">
+                <a href="{{route('admin.main')}}" class="nav-link">
+                    <i class="nav-icon fas fa-home"></i>
+                    <span class="brand-text font-weight-light ">Главная</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('admin.user.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>
+                        Пользователи
+                    </p>
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="{{route('admin.post.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
@@ -25,20 +36,13 @@
             </li>
             <li class="nav-item">
                 <a href="{{route('admin.tag.index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-book"></i></i>
+                    <i class="nav-icon fas fa-book"></i>
                     <p>
                         Тэги
                     </p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{route('admin.user.index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-user"></i></i>
-                    <p>
-                        Пользователи
-                    </p>
-                </a>
-            </li>
+
         </ul>
     </div>
 
