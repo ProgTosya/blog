@@ -12,8 +12,35 @@
                         <div class="blog-post-thumbnail-wrapper">
                             <img src="{{'storage/' . $post->preview_image}}" alt="blog post">
                         </div>
-                        <p class="blog-post-category">{{$post->category->title}}</p>
-                        <a href="#" class="blog-post-permalink">
+                        <div class="d-flex justify-content-between">
+                            <p class="blog-post-category">{{$post->category->title}}</p>
+                            @auth()
+                            <form action="{{route('post.store.like', $post->id)}}" method="POST">
+                                <span>
+                                        {{$post->liked_users_count}}
+                                    </span>
+                                @csrf
+                                <button type="submit" class="bg-transparent border-0">
+
+                                        @if(auth()->user()->likedPosts->contains($post->id))
+                                            <i class="fas fa-heart"></i>
+                                        @else
+                                            <i class="far fa-heart"></i>
+                                        @endif
+
+                                </button>
+                            </form>
+                            @endauth
+                            @guest()
+                                <div>
+                                    <span>
+                                    {{$post->liked_users_count}}
+                                    </span>
+                                    <i class="far fa-heart"></i>
+                                </div>
+                            @endguest
+                        </div>
+                        <a href="{{route('post.show', $post->id)}}" class="blog-post-permalink">
                             <h6 class="blog-post-title">{{$post->title}}</h6>
                         </a>
                     </div>
@@ -31,11 +58,39 @@
                     <div class="row blog-post-row">
                         @foreach($randomPosts as $ranPost)
                             <div class="col-md-6 blog-post" data-aos="fade-up">
+
                                 <div class="blog-post-thumbnail-wrapper">
                                     <img src="{{'Storage/' . $ranPost->preview_image}}" alt="blog post">
                                 </div>
+                                <div class="d-flex justify-content-between">
                                 <p class="blog-post-category">{{$ranPost->category->title}}</p>
-                                <a href="#!" class="blog-post-permalink">
+                                    @auth()
+                                <form action="{{route('post.store.like', $ranPost->id)}}" method="POST">
+                                    @csrf
+                                    <span>
+                                        {{$ranPost->liked_users_count}}
+                                    </span>
+                                    <button type="submit" class="bg-transparent border-0">
+
+                                            @if(auth()->user()->likedPosts->contains($ranPost->id))
+                                                <i class="fas fa-heart"></i>
+                                            @else
+                                                <i class="far fa-heart"></i>
+                                            @endif
+
+                                    </button>
+                                </form>
+                                    @endauth
+                                    @guest()
+                                        <div>
+                                    <span>
+                                    {{$ranPost->liked_users_count}}
+                                    </span>
+                                            <i class="far fa-heart"></i>
+                                        </div>
+                                    @endguest
+                            </div>
+                                <a href="{{route('post.show', $ranPost->id)}}" class="blog-post-permalink">
                                     <h6 class="blog-post-title">{{$ranPost->title}}</h6>
                                 </a>
                             </div>
@@ -82,7 +137,7 @@
                     <ul class="post-list">
                         @foreach($likedPost as $post)
                             <li class="post">
-                                <a href="#!" class="post-permalink media">
+                                <a href="{{route('post.show', $post->id)}}" class="post-permalink media">
                                     <img src="{{'storage/' . $post->preview_image}}" alt="blog post">
                                     <div class="media-body">
                                         <h6 class="post-title">{{$post->title}}</h6>

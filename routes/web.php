@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Main\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return 'aa';
+
+
+Route::group(['namespace' => 'Main'], function () {
+    Route::get('/', [\App\Http\Controllers\Main\IndexController::class, '__invoke'])->name('main.index');
 });
-Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
-    Route::get('/', IndexController::class)->name('main.index');
+Route::group(['namespace' => 'Post', 'prefix' => 'post'], function () {
+    Route::get('/', [\App\Http\Controllers\Post\IndexController::class, '__invoke'])->name('post.index');
+    Route::get('/{post}', [\App\Http\Controllers\Post\ShowController::class, '__invoke'])->name('post.show');
+    Route::group(['namespace' => 'Comment', 'prefix' => '{post}/comments'],function (){
+       Route::post('/',[\App\Http\Controllers\Post\Comment\StoreController::class, '__invoke'])->name('post.store.comment');
+    });
+    Route::group(['namespace' => 'Like', 'prefix' => '{post}/likes'],function (){
+        Route::post('/',[\App\Http\Controllers\Post\Like\StoreController::class, '__invoke'])->name('post.store.like');
+    });
+});
+Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function () {
+    Route::get('/', [\App\Http\Controllers\Category\IndexController::class, '__invoke'])->name('category.index');
+    Route::group(['namespace' => 'Post', 'prefix' => '{category}/posts'],function (){
+        Route::get('/',[\App\Http\Controllers\Category\Post\IndexController::class, '__invoke'])->name('category.post.index');
+    });
 });
 
 Route::group(['namespace' => 'Personal','prefix' => 'personal', 'middleware' => ['auth', 'verified']], function() {

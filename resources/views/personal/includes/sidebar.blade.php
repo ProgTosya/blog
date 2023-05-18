@@ -5,7 +5,7 @@
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item">
-                <a href="{{route('personal.main.index')}}" class="nav-link">
+                <a href="{{route('post.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-home"></i>
                     <span class="brand-text font-weight-light ">Главная</span>
                 </a>
